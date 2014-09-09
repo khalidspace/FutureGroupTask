@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<h:form>
+		<h:panelGrid id="grid" columns="4" cellpadding="5">
+			<p:outputLabel for="title" value="Title" style="font-weight:bold"></p:outputLabel>
+			<p:inputText id="title" value="#{bookStoreView.book.title}" />
+			<p:message for="title" value="title:"></p:message>
+			<h:outputText value="#{bookStoreView.book.title}" />
+
+			<p:outputLabel for="auther" value="Author" style="font-weight:bold"></p:outputLabel>
+			<p:inputText id="auther" value="#{bookStoreView.book.author}" />
+			<p:message for="auther" value="auther:"></p:message>
+			<h:outputText value="#{bookStoreView.book.author}" />
+
+			<p:outputLabel for="pd" value="Publish Date" style="font-weight:bold"></p:outputLabel>
+			<p:calendar id="pd" value="#{bookStoreView.book.publishDate}">
+				<f:convertDateTime dateStyle="dd/MM/YYYY" />
+			</p:calendar>
+			<p:message for="pd" value="Publish Date:"></p:message>
+			<h:outputText value="#{bookStoreView.book.publishDate}">
+				<f:convertDateTime pattern="MM/dd/yyyy" />
+			</h:outputText>
+
+			<p:outputLabel for="prc" value="Price" style="font-weight:bold"></p:outputLabel>
+			<p:inputText id="prc" value="#{bookStoreView.book.price}" />
+			<p:message for="prc" value="Price:"></p:message>
+			<h:outputText value="#{bookStoreView.book.price}" />
+	
+			<p:commandButton value="Save" update=":form1:booksGrid" icon="ui-icon-check"
+				validateClient="true" style="margin-right:10px" actionListener="#{bookStoreView.SaveBook()}" />
+				
+		</h:panelGrid>
+	</h:form>
+</h:body>
+
+
+</html>

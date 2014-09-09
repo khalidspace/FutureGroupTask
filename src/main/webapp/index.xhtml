@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<h:head>
+
+</h:head>
+
+<h:body>
+<h:form id="form1">
+	<p:layout >
+		<p:layoutUnit position="west" resizable="true" size="120" minSize="100"
+			maxSize="750">			
+			<p:dataTable var="section" value="#{bookStoreView.allSections}"
+				rowIndexVar="index">
+				<p:column headerText="Sections">
+					<p:commandButton value="#{section.sectionName}" id="ajax"
+						update=":form1:booksGrid"
+						action="#{bookStoreView.loadSectionBooks(section)}"
+						ajax="true"
+						styleClass="ui-priority-primary" >
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center" id="booksLayout">
+			<p:commandButton value="Add Book" actionListener="#{bookView.openAddBookDialog()}" icon=".ui-icon-plus" ajax="true" ></p:commandButton>
+			<p:dataScroller value="#{bookStoreView.sectionBooks}" var="book"
+				chunkSize="10" id="booksGrid">
+				<f:facet name="header">
+					<h:outputText value="#{bookStoreView.currentSection.sectionName}" />
+				</f:facet>
+				<f:facet name="loader">
+					<p:commandButton type="button" value="More"
+						icon="ui-icon-circle-triangle-s" />
+				</f:facet>
+				<p:outputPanel>
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="Title:" />
+						<h:outputText value="#{book.title}" style="font-weight: bold" />
+
+						<h:outputText value="author:" />
+						<h:outputText value="#{book.author}" style="font-weight: bold" />
+
+						<h:outputText value="publish date:" />
+						<h:outputText value="#{book.publishDate}"
+							style="font-weight: bold" />
+
+						<h:outputText value="price:" />
+						<h:outputText value="#{book.price}" style="font-weight: bold" />
+						
+						
+					</h:panelGrid>
+					<p:commandButton value="delete" action="#{bookStoreView.deleteBook(book)}" ></p:commandButton>
+				</p:outputPanel>
+				<p:separator></p:separator>			
+			</p:dataScroller>
+		</p:layoutUnit>
+	</p:layout>
+
+</h:form>
+</h:body>
+</html>
